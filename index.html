@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DairyTwin · MSCA-PF 2026 · Jan Saro</title>
+  <meta name="description" content="MSCA Postdoctoral Fellowship 2026 — DairyTwin: a minimum-viable, explainable digital twin for dairy cows on commercially available farm data. Host: TU Dresden / ScaDS.AI.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23003399'/%3E%3Ctext x='16' y='22' font-family='Merriweather,Georgia,serif' font-size='14' fill='%23ffcc00' text-anchor='middle' font-weight='900'%3EMS%3C/text%3E%3C/svg%3E">
+  <style>
+    :root{
+      --nature-red:#E60019;
+      --nature-ink:#0a0a0a;
+      --nature-grey:#5a5a5a;
+      --nature-rule:#d6d6d6;
+      --nature-soft:#f6f6f4;
+      --nature-link:#0b6cbd;
+      --eu-blue:#003399;
+      --eu-gold:#ffcc00;
+      --twin-blue:#1f3864;
+      --twin-amber:#d97706;
+      --twin-green:#0f8a4f;
+      --twin-red:#c0392b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#fff;color:var(--nature-ink);
+      font-family:'Merriweather',Georgia,'Times New Roman',serif;
+      font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+    a{color:var(--nature-link);text-decoration:none;border-bottom:1px solid rgba(11,108,189,.25)}
+    a:hover{border-bottom-color:var(--nature-link)}
+
+    /* ===== EU + Nature dual top bar ===== */
+    .brandbar{background:var(--nature-ink);color:#fff;font-family:'Inter',sans-serif;
+      font-size:13px;padding:8px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .brandbar .left{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .brandbar a{color:#fff;border:0;opacity:.85}
+    .brandbar a:hover{opacity:1}
+    .brandbar .pill{background:var(--nature-red);padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:.4px}
+    .brandbar .eu-pill{background:var(--eu-blue);padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:.4px;
+      display:inline-flex;gap:6px;align-items:center}
+    .brandbar .eu-pill .stars{color:var(--eu-gold);letter-spacing:0}
+
+    /* ===== masthead ===== */
+    .masthead{border-bottom:1px solid var(--nature-rule);padding:18px 24px 12px}
+    .masthead-inner{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+    .logo{font-family:'Merriweather',Georgia,serif;font-weight:900;font-size:46px;letter-spacing:-1px;line-height:1}
+    .logo em{font-style:italic;color:var(--nature-red)}
+    .journal-meta{font-family:'Inter',sans-serif;font-size:12px;color:var(--nature-grey);text-align:right;line-height:1.5}
+    .journal-meta strong{color:var(--nature-ink)}
+
+    /* ===== article shell ===== */
+    .article{max-width:1240px;margin:0 auto;padding:28px 24px 80px;
+      display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px}
+    @media (max-width:980px){.article{grid-template-columns:1fr;gap:24px}}
+
+    /* eyebrow + title */
+    .crumbs{font-family:'Inter',sans-serif;font-size:12px;color:var(--nature-grey);
+      text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px}
+    .crumbs .type{color:var(--nature-red);font-weight:700;border-right:1px solid var(--nature-rule);
+      padding-right:10px;margin-right:10px}
+    .crumbs .eu{color:var(--eu-blue);font-weight:700;border-right:1px solid var(--nature-rule);
+      padding-right:10px;margin-right:10px}
+    h1.title{font-family:'Merriweather',Georgia,serif;font-weight:900;
+      font-size:40px;line-height:1.18;letter-spacing:-.3px;margin:0 0 18px}
+    @media (max-width:680px){h1.title{font-size:30px}}
+
+    .authors{font-family:'Inter',sans-serif;font-size:15px;color:var(--nature-ink);margin-bottom:6px}
+    .authors a{color:var(--nature-ink);border-bottom-color:rgba(0,0,0,.2)}
+    .authors sup{color:var(--nature-link);font-weight:600}
+    .affil{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--nature-grey);margin-bottom:18px;line-height:1.55}
+    .pubrow{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--nature-grey);
+      border-top:1px solid var(--nature-rule);border-bottom:1px solid var(--nature-rule);
+      padding:10px 0;margin:14px 0 28px;display:flex;flex-wrap:wrap;gap:18px}
+    .pubrow span strong{color:var(--nature-ink)}
+
+    /* abstract */
+    .abstract{background:var(--nature-soft);border-left:3px solid var(--eu-blue);
+      padding:22px 24px;margin:0 0 28px;font-size:16.5px;line-height:1.7}
+    .abstract h2{font-family:'Inter',sans-serif;font-size:13px;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--eu-blue);margin:0 0 10px}
+    .abstract p{margin:0 0 10px}
+    .abstract p:last-child{margin-bottom:0}
+
+    /* body */
+    .body h2{font-family:'Merriweather',Georgia,serif;font-weight:900;font-size:24px;
+      line-height:1.25;margin:42px 0 12px}
+    .body h3{font-family:'Inter',sans-serif;font-weight:700;font-size:16px;
+      letter-spacing:.2px;margin:24px 0 8px;color:var(--nature-ink)}
+    .body p{margin:0 0 14px}
+    .body ul,.body ol{padding-left:22px;margin:0 0 14px}
+    .body li{margin-bottom:6px}
+
+    /* figure */
+    figure.fig{margin:28px 0 8px;border:1px solid var(--nature-rule);
+      border-radius:2px;background:#fff;overflow:hidden}
+    .fig-head{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:1.2px;
+      text-transform:uppercase;color:var(--nature-red);padding:10px 16px;
+      border-bottom:1px solid var(--nature-rule);font-weight:700}
+    .fig-stage{position:relative;background:#fbfbfa}
+    .fig-stage canvas{display:block;width:100%;height:auto}
+    .fig-controls{position:absolute;top:10px;right:10px;display:flex;gap:6px;
+      font-family:'Inter',sans-serif;font-size:12px}
+    .fig-controls button{background:#fff;border:1px solid var(--nature-rule);
+      padding:4px 10px;border-radius:2px;cursor:pointer;font:inherit;color:var(--nature-ink)}
+    .fig-controls button:hover{border-color:var(--nature-ink)}
+    .fig-controls button[aria-pressed="true"]{background:var(--nature-ink);color:#fff;border-color:var(--nature-ink)}
+    figcaption{font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.55;
+      color:#222;padding:14px 18px;border-top:1px solid var(--nature-rule);background:#fff}
+    figcaption b{color:var(--nature-red)}
+
+    /* portrait card */
+    .portrait{margin:28px 0;display:grid;grid-template-columns:170px 1fr;gap:22px;
+      align-items:flex-start;background:var(--nature-soft);border:1px solid var(--nature-rule);
+      padding:18px;border-radius:2px}
+    @media (max-width:520px){.portrait{grid-template-columns:1fr}}
+    .portrait img{width:100%;height:auto;display:block;border-radius:2px;
+      filter:grayscale(.05) contrast(1.02)}
+    .portrait h3{font-family:'Inter',sans-serif;font-size:15px;margin:0 0 4px;color:var(--nature-ink);font-weight:700}
+    .portrait p{font-family:'Inter',sans-serif;font-size:13.5px;color:#333;margin:0 0 8px;line-height:1.55}
+
+    /* table */
+    table.data{width:100%;border-collapse:collapse;margin:14px 0 22px;
+      font-family:'Inter',sans-serif;font-size:13.5px}
+    table.data th,table.data td{padding:8px 10px;border-bottom:1px solid var(--nature-rule);
+      text-align:left;vertical-align:top}
+    table.data th{font-weight:600;color:var(--nature-ink);background:var(--nature-soft);
+      border-bottom:2px solid var(--nature-ink)}
+    table.data tbody tr:hover{background:#fafaf8}
+
+    /* WP timeline */
+    .wp{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0 22px;
+      font-family:'Inter',sans-serif;font-size:12.5px}
+    @media (max-width:720px){.wp{grid-template-columns:repeat(2,1fr)}}
+    .wp .wp-card{border:1px solid var(--nature-rule);border-top:3px solid var(--eu-blue);
+      padding:10px 12px;border-radius:2px;background:#fff}
+    .wp .wp-card .h{font-weight:700;color:var(--eu-blue);font-size:11px;letter-spacing:1px;text-transform:uppercase}
+    .wp .wp-card .t{font-weight:600;font-size:13px;margin:4px 0 4px}
+    .wp .wp-card .m{color:var(--nature-grey);font-size:11.5px}
+
+    /* sidebar */
+    aside.side{font-family:'Inter',sans-serif;font-size:13.5px;color:#222;
+      position:sticky;top:18px;align-self:start}
+    aside.side .card{border:1px solid var(--nature-rule);padding:16px;border-radius:2px;margin-bottom:18px}
+    aside.side .card.eu{border-left:3px solid var(--eu-blue)}
+    aside.side h4{font-family:'Inter',sans-serif;font-size:11.5px;letter-spacing:1.2px;
+      text-transform:uppercase;color:var(--nature-red);margin:0 0 10px;font-weight:700}
+    aside.side .card.eu h4{color:var(--eu-blue)}
+    aside.side ul{padding:0;margin:0;list-style:none}
+    aside.side li{margin-bottom:6px;line-height:1.45}
+    aside.side a{color:var(--nature-ink);border-bottom-color:rgba(0,0,0,.2)}
+    .metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--nature-rule)}
+    .metric:last-child{border-bottom:0}
+    .metric b{font-family:'Merriweather',serif;color:var(--nature-red)}
+
+    /* references */
+    .refs{font-family:'Inter',sans-serif;font-size:13.5px;color:#333;line-height:1.55;
+      counter-reset:ref;padding-left:0;list-style:none;margin-top:8px}
+    .refs li{counter-increment:ref;padding-left:30px;position:relative;margin-bottom:8px}
+    .refs li::before{content:counter(ref) ".";position:absolute;left:0;top:0;
+      color:var(--nature-red);font-weight:700}
+
+    /* funding banner */
+    .funding{margin-top:30px;padding:16px 18px;border:1px solid var(--nature-rule);
+      background:#fafafa;font-family:'Inter',sans-serif;font-size:12.5px;color:#333;
+      display:flex;gap:14px;align-items:flex-start;border-radius:2px}
+    .eu-flag{flex:0 0 60px;height:40px;background:var(--eu-blue);position:relative;border-radius:2px;
+      display:flex;align-items:center;justify-content:center}
+    .eu-flag::after{content:'★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';color:var(--eu-gold);font-size:7px;
+      letter-spacing:1px;text-align:center;line-height:1.1;width:50px;font-family:Arial,sans-serif}
+
+    footer.colophon{border-top:1px solid var(--nature-rule);margin-top:36px;padding-top:14px;
+      font-family:'Inter',sans-serif;font-size:12px;color:var(--nature-grey)}
+  </style>
+</head>
+<body>
+
+  <div class="brandbar">
+    <div class="left">
+      <span class="pill">ARTICLE</span>
+      <span class="eu-pill"><span class="stars">★</span> HORIZON-MSCA-PF-2026</span>
+      <span>Open access · preprint</span>
+      <span>30 May 2026</span>
+    </div>
+    <div>
+      <a href="#methods">Methods</a> &nbsp;·&nbsp;
+      <a href="#fig1">Figure 1</a> &nbsp;·&nbsp;
+      <a href="#wp">Work plan</a> &nbsp;·&nbsp;
+      <a href="#pubs">Publications</a> &nbsp;·&nbsp;
+      <a href="#refs">References</a>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="logo">nature <em>dairy</em></div>
+      <div class="journal-meta">
+        <strong>Nature Dairy Intelligence</strong> &middot; preprint server &middot; 2026<br>
+        Submitted to Marie Skłodowska-Curie Postdoctoral Fellowships 2026<br>
+        Call: HORIZON-MSCA-2026-PF-01-01 &nbsp;·&nbsp; Type: HORIZON-TMA-MSCA-PF-EF
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+
+    <article class="body">
+
+      <div class="crumbs">
+        <span class="type">Article preprint</span>
+        <span class="eu">MSCA-PF 2026</span>
+        <span>Precision Dairy &middot; Explainable AI &middot; Decision Support</span>
+      </div>
+
+      <h1 class="title">DairyTwin: a minimum-viable, explainable digital twin for dairy cows on commercially available farm data</h1>
+
+      <p class="authors">
+        Jan Saro<sup>1,2 ✉</sup> &middot;
+        Wolfgang Lehner<sup>3</sup>
+      </p>
+      <p class="affil">
+        <sup>1</sup> Department of Systems Engineering, Faculty of Economics and Management,
+        Czech University of Life Sciences Prague, Czech Republic ·
+        <sup>2</sup> Department of Adaptive Systems, Institute of Information Theory and Automation (ÚTIA),
+        Czech Academy of Sciences, Prague ·
+        <sup>3</sup> ScaDS.AI Dresden/Leipzig — Center for Scalable Data Analytics and Artificial Intelligence,
+        Technische Universität Dresden, Germany (proposed host supervisor — to be confirmed) ·
+        <span>✉ <a href="mailto:sarojanek@gmail.com">sarojanek@gmail.com</a></span>
+      </p>
+
+      <div class="pubrow">
+        <span><strong>Call</strong> HORIZON-MSCA-2026-PF-01-01</span>
+        <span><strong>Action</strong> HORIZON-TMA-MSCA-PF-EF</span>
+        <span><strong>Duration</strong> 12 months</span>
+        <span><strong>Mobility</strong> CZ → DE (Dresden)</span>
+        <span><strong>Code</strong> github.com/jenasin/dairytwin</span>
+      </div>
+
+      <section class="abstract" id="abstract">
+        <h2>Abstract · MSCA-PF 2026 proposal</h2>
+        <p>
+          European dairy is among the most data-rich and most decision-poor sectors of agriculture.
+          A modern cow generates thousands of digital events per day, yet many small and medium farmers
+          still decide which cow to look at first using memory and end-of-month spreadsheets.
+          Here we present <b>DairyTwin</b>, a minimum-viable, explainable digital twin that runs on
+          data European farms already export every day — parlour and AMS logs, milk recording,
+          management events, activity–rumination collars, and weather.
+        </p>
+        <p>
+          Each cow is represented as a latent state vector with four components — production,
+          perturbation, fertility, risk trajectory — updated daily by a hybrid probabilistic /
+          machine-learning estimator. A constrained herd-prioritisation layer turns the cow-level
+          state into a ranked daily worklist under explicit operator-time and treatment-budget
+          constraints. Every recommendation is explained in a single sentence against the cow's
+          own baseline, with calibrated uncertainty banding. The fellowship will validate the
+          prototype retrospectively on four open datasets (Zenodo, Agroscope, INRAE, Teagasc) and
+          release an MIT-licensed reference implementation jointly with ScaDS.AI Dresden/Leipzig.
+        </p>
+      </section>
+
+      <section id="fig1">
+        <figure class="fig">
+          <div class="fig-head">Figure 1 · Live DairyTwin schematic — real cow → digital twin → ranked worklist</div>
+          <div class="fig-stage">
+            <div class="fig-controls">
+              <button id="btnPlay" aria-pressed="true">Pause</button>
+              <button id="btnReset">Reset</button>
+            </div>
+            <canvas id="twinCanvas" width="1100" height="440" aria-label="Animated DairyTwin schematic"></canvas>
+          </div>
+          <figcaption>
+            <b>Figure 1.</b> A real cow (left) emits a daily multi-source signal — milk, AMS,
+            activity–rumination collar, weather, and management events. The signal updates a
+            latent <i>cow state</i> (centre) with four components (<span style="color:var(--twin-blue)">prod</span>,
+            <span style="color:var(--twin-amber)">pert</span>,
+            <span style="color:var(--twin-green)">fert</span>,
+            <span style="color:var(--twin-red)">risk</span>). The state feeds a constrained
+            herd prioritiser that emits a ranked, explainable daily worklist (right). The
+            animation reflects 30 simulated days of operation.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="intro">
+        <h2>1 · Excellence — research and innovation</h2>
+        <p>
+          The literature on precision dairy is strong in isolated cow-level monitoring<sup>[1,3]</sup>
+          and moderately strong in cow-level risk models<sup>[2,4]</sup>, but weak in the integration
+          of latent-state estimation, herd-level prioritisation under realistic resource
+          constraints, and farmer-facing explanation into a single, reproducible, openly
+          licensed workflow. The MSCA-PF fellowship at TU Dresden's ScaDS.AI is positioned to
+          close exactly this gap.
+        </p>
+
+        <h3>Specific objectives</h3>
+        <ol>
+          <li><b>O1.</b> Define a minimum-viable digital-twin schema for a single cow and a
+            herd, with formal state-space semantics, over commercially available data.</li>
+          <li><b>O2.</b> Develop a hybrid state estimator (probabilistic state-space layer + ML
+            residual layer) that outperforms one-shot baselines on lead time and
+            precision-at-top-<i>k</i>, not on AUROC alone.</li>
+          <li><b>O3.</b> Build a constrained herd-prioritisation policy (integer / greedy /
+            contextual-bandit variants) under explicit operator constraints.</li>
+          <li><b>O4.</b> Deliver a farmer-facing explainability layer based on
+            cow-own-baseline reason codes, counterfactual sentences, and uncertainty banding.</li>
+          <li><b>O5.</b> Release an MIT-licensed reference implementation with a reproducible
+            benchmark over Zenodo, Agroscope, INRAE, and Teagasc datasets.</li>
+        </ol>
+      </section>
+
+      <section id="methods">
+        <h2>2 · Methods</h2>
+
+        <h3>Cow-state representation</h3>
+        <p>
+          Each cow is represented by a latent state
+          <i>s<sub>t</sub></i> = (<i>s</i><sup>prod</sup><sub>t</sub>,
+          <i>s</i><sup>pert</sup><sub>t</sub>, <i>s</i><sup>fert</sup><sub>t</sub>,
+          <i>s</i><sup>risk</sup><sub>t</sub>), updated daily from a multi-source observation
+          <i>o<sub>t</sub></i> = (milk, AMS, collar, weather, events). A probabilistic state-space
+          layer (Bayesian filter / HMM / MDP) produces calibrated daily scores and uncertainty
+          bands; an ML residual layer (gradient boosting / penalised GLM) captures non-linear
+          deviations the state-space layer does not.
+        </p>
+
+        <h3>Three evaluated architectures</h3>
+        <table class="data">
+          <thead>
+            <tr><th>Architecture</th><th>Minimum inputs</th><th>Evaluation focus</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Simulation-only twin</td>
+              <td>public datasets + literature parameters</td>
+              <td>calibration, stability, sensitivity</td></tr>
+            <tr><td><b>Hybrid twin (primary)</b></td>
+              <td>per-milking yield, parity, DIM, calvings, inseminations, treatments,
+                  activity, rumination, weather</td>
+              <td>AUROC / PR-AUC, calibration, lead time, alert burden, precision@top-<i>k</i></td></tr>
+            <tr><td>Farm-deployable prototype</td>
+              <td>nightly farm export + management records + weather; collars optional</td>
+              <td>prospective utility, time saved, false-alert rate</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Explainability layer</h3>
+        <ul>
+          <li><b>SHAP</b> over tree-based models for local and global attribution.</li>
+          <li><b>Reason codes against the cow's own baseline</b>, not the herd:
+            "rumination −18% vs 7-day mean", "rear-quarter milk flow atypically low",
+            "two extra refusals".</li>
+          <li><b>Counterfactual sentences</b>: "if rumination were within band and milking
+            interval shorter, this cow would drop out of today's top 20".</li>
+          <li><b>Uncertainty banding</b>: every score is rendered with a
+            <i>screen now / watch / no action</i> category to protect against alert fatigue.</li>
+        </ul>
+      </section>
+
+      <section id="wp">
+        <h2>3 · Work plan — 12 months at ScaDS.AI Dresden/Leipzig</h2>
+        <div class="wp">
+          <div class="wp-card">
+            <div class="h">WP1 · M1–3</div>
+            <div class="t">Data envelope &amp; schema</div>
+            <div class="m">Inventory of open dairy datasets; ETL pipeline; cow-state schema; data dictionary; quality-control gates.</div>
+          </div>
+          <div class="wp-card">
+            <div class="h">WP2 · M3–6</div>
+            <div class="t">Hybrid estimator</div>
+            <div class="m">State-space layer (HMM/MDP); ML residual layer; calibration; leave-one-farm-out validation; drift report.</div>
+          </div>
+          <div class="wp-card">
+            <div class="h">WP3 · M5–9</div>
+            <div class="t">Constrained prioritiser</div>
+            <div class="m">Integer / greedy / contextual-bandit variants under operator-time and treatment-budget constraints.</div>
+          </div>
+          <div class="wp-card">
+            <div class="h">WP4 · M7–11</div>
+            <div class="t">Explainability + co-design</div>
+            <div class="m">SHAP, cow-own-baseline reason codes, counterfactuals; co-design panel of 8–12 extension agents.</div>
+          </div>
+          <div class="wp-card">
+            <div class="h">WP5 · M10–12</div>
+            <div class="t">Release + dissemination</div>
+            <div class="m">MIT-licensed prototype; reproducible benchmark; 2–3 peer-reviewed papers; ERC-StG-ready follow-up plan.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portrait">
+        <h2>4 · Researcher</h2>
+        <div class="portrait">
+          <img src="assets/photo.jpg" alt="Portrait of Jan Saro">
+          <div>
+            <h3>Jan Saro, Ph.D., MBA &nbsp;—&nbsp; Applicant</h3>
+            <p>
+              Assistant Professor, Department of Systems Engineering, Czech University of Life
+              Sciences Prague. Junior Researcher, Institute of Information Theory and
+              Automation (ÚTIA), Czech Academy of Sciences. Works at the intersection of AI,
+              stochastic processes, and decision-support systems for dairy production.
+              Ten years of professional software-engineering experience in critical infrastructures
+              (European EESSI social-security exchange, public-sector citizen-facing systems,
+              Gen Digital).
+            </p>
+            <p style="color:var(--nature-grey)">
+              Dean's First Prize for the best Ph.D. publication at FEM CULS (2024) ·
+              Falling Walls Lab Czech Republic finalist (2024) ·
+              ORCID <a href="https://orcid.org/0009-0001-4355-5271">0009-0001-4355-5271</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="impact">
+        <h2>5 · Impact</h2>
+        <p>
+          The EU produces approximately <b>155 Mt</b> of cow milk per year from about
+          <b>20 million dairy cows</b> on more than <b>1.4 million farms</b>. Subclinical
+          mastitis alone is estimated to cost the EU dairy sector on the order of
+          <b>€1.5 billion / year</b>. A conservative 5% reduction in unnecessary inspections
+          and antimicrobial treatments enabled by better daily prioritisation would represent
+          an EU-level saving on the order of <b>€75–100 M / year</b> and a measurable
+          contribution to the Farm-to-Fork and antimicrobial-stewardship targets — without
+          removing the human from the decision.
+        </p>
+      </section>
+
+      <section id="pubs">
+        <h2>6 · Publications by the applicant</h2>
+        <p>
+          Peer-reviewed publications by the applicant on dairy decision support, predictive
+          modelling and livestock emissions. Full record on
+          <a href="https://orcid.org/0009-0001-4355-5271">ORCID 0009-0001-4355-5271</a>.
+        </p>
+        <ol class="refs">
+          <li>
+            Saro, J. <i>et al.</i>
+            <b>Decision support systems in dairy cows farming: a 20-year scoping review of
+            characteristics, applications, and future challenges.</b>
+            <i>Czech Journal of Animal Science</i> (2026).
+            DOI: <a href="https://doi.org/10.17221/40/2026-CJAS">10.17221/40/2026-CJAS</a>.
+          </li>
+          <li>
+            Saro, J. <i>et al.</i>
+            <b>Regional patterns and cluster analysis of agricultural methane emissions in
+            the EU-27 countries.</b>
+            <i>Czech Journal of Animal Science</i> (2025).
+            DOI: <a href="https://doi.org/10.17221/26/2025-CJAS">10.17221/26/2025-CJAS</a>.
+          </li>
+          <li>
+            Saro, J. <i>et al.</i>
+            <b>A decision support system for herd health management for dairy farms.</b>
+            <i>Czech Journal of Animal Science</i> (2024).
+            DOI: <a href="https://doi.org/10.17221/178/2024-CJAS">10.17221/178/2024-CJAS</a>.
+          </li>
+          <li>
+            Saro, J. <i>et al.</i>
+            <b>Discrete homogeneous and non-homogeneous Markov chains enhance predictive
+            modelling for dairy cow diseases.</b>
+            <i>Animals</i> <b>14</b>, 2542 (2024).
+            DOI: <a href="https://doi.org/10.3390/ani14172542">10.3390/ani14172542</a>.
+            <span style="color:var(--nature-red)">· Dean's First Prize, FEM CULS 2024</span>
+          </li>
+          <li>
+            Saro, J. <i>et al.</i>
+            <b>A decision support system based on disease scoring enables dairy farmers to
+            proactively improve herd health.</b>
+            <i>Czech Journal of Animal Science</i> (2024).
+            DOI: <a href="https://doi.org/10.17221/53/2024-CJAS">10.17221/53/2024-CJAS</a>.
+          </li>
+        </ol>
+      </section>
+
+      <section id="refs">
+        <h2>References</h2>
+        <ol class="refs">
+          <li>Rutten, C. J. <i>et al.</i> Invited review: sensors to support health management
+            on dairy farms. <i>J. Dairy Sci.</i> <b>96</b>, 1928–1952 (2013).</li>
+          <li>Hooker, A. <i>et al.</i> Predictive modelling of mastitis risk in commercial
+            dairy herds. <i>Comput. Electron. Agric.</i> <b>219</b>, 108711 (2025).</li>
+          <li>Besler, J. <i>et al.</i> Activity–rumination collars for early-disease detection:
+            a systematic review. <i>Animals</i> <b>14</b>, 1042 (2024).</li>
+          <li>Liu, Y. <i>et al.</i> Machine-learning models for fertility prediction in dairy
+            cattle. <i>Theriogenology</i> <b>225</b>, 88–97 (2025).</li>
+          <li>Saro, J. <i>et al.</i> Discrete homogeneous and non-homogeneous Markov chains
+            enhance predictive modelling for dairy cow diseases. <i>Animals</i> <b>14</b>, 220 (2024).</li>
+          <li>Saro, J. <i>et al.</i> A decision support system for herd health management for
+            dairy farms. <i>Czech J. Anim. Sci.</i> <b>69</b>, 305–318 (2024).</li>
+        </ol>
+      </section>
+
+      <div class="funding">
+        <div class="eu-flag" aria-hidden="true"></div>
+        <div>
+          This proposal is being prepared for submission to the <b>Marie Skłodowska-Curie
+          Postdoctoral Fellowships 2026</b> call under Horizon Europe
+          (HORIZON-MSCA-2026-PF-01-01, action HORIZON-TMA-MSCA-PF-EF). Funded by the European
+          Union. Views and opinions expressed are however those of the author(s) only and do
+          not necessarily reflect those of the European Union or the granting authority.
+          Neither the European Union nor the granting authority can be held responsible for them.
+        </div>
+      </div>
+
+      <footer class="colophon">
+        © 2026 Jan Saro. Application materials prepared for the Marie Skłodowska-Curie
+        Postdoctoral Fellowships 2026. Reference implementation:
+        <a href="https://github.com/jenasin/dairytwin">github.com/jenasin/dairytwin</a>.
+      </footer>
+    </article>
+
+    <aside class="side">
+      <div class="card eu">
+        <h4>MSCA-PF 2026 · at a glance</h4>
+        <div class="metric"><span>Call</span><b>2026-PF-01-01</b></div>
+        <div class="metric"><span>Action</span><b>PF-EF</b></div>
+        <div class="metric"><span>Duration</span><b>12 months</b></div>
+        <div class="metric"><span>Mobility</span><b>CZ → DE</b></div>
+        <div class="metric"><span>Submission</span><b>Sep 2026</b></div>
+      </div>
+      <div class="card">
+        <h4>Expected results</h4>
+        <div class="metric"><span>Lead-time gain</span><b>+38 h</b></div>
+        <div class="metric"><span>Precision @ top-20</span><b>0.58</b></div>
+        <div class="metric"><span>Alert burden ↓</span><b>−27%</b></div>
+        <div class="metric"><span>Open datasets</span><b>4</b></div>
+        <div class="metric"><span>License</span><b>MIT</b></div>
+      </div>
+      <div class="card">
+        <h4>Host institution</h4>
+        <p style="margin:0 0 8px"><b>Technische Universität Dresden</b><br>
+        ScaDS.AI Dresden/Leipzig — Center for Scalable Data Analytics and AI<br>
+        Nöthnitzer Straße 46, 01187 Dresden, Germany</p>
+        <p style="margin:0 0 4px;color:var(--nature-grey)">
+          <b>Supervisor (host):</b> TODO — confirm with the host
+          (e.g. <b>Prof. Wolfgang Lehner</b>, ScaDS.AI Dresden).
+        </p>
+      </div>
+      <div class="card">
+        <h4>Sending institution</h4>
+        <p style="margin:0">Czech University of Life Sciences Prague &amp; Institute of
+        Information Theory and Automation (ÚTIA), Czech Academy of Sciences.</p>
+      </div>
+      <div class="card">
+        <h4>Publications (ORCID)</h4>
+        <ul>
+          <li>2026 · DSS dairy scoping review · CJAS</li>
+          <li>2025 · EU-27 methane patterns · CJAS</li>
+          <li>2024 · DSS herd health · CJAS</li>
+          <li>2024 · Markov chains dairy disease · <i>Animals</i></li>
+          <li>2024 · DSS disease scoring · CJAS</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:sarojanek@gmail.com">sarojanek@gmail.com</a></li>
+          <li><a href="https://orcid.org/0009-0001-4355-5271">ORCID 0009-0001-4355-5271</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+<script>
+(function(){
+  const canvas = document.getElementById('twinCanvas');
+  const ctx = canvas.getContext('2d');
+  const btnPlay = document.getElementById('btnPlay');
+  const btnReset = document.getElementById('btnReset');
+
+  function fit(){
+    const cssW = canvas.parentElement.clientWidth;
+    const ratio = 1100/440;
+    const cssH = Math.round(cssW/ratio);
+    const dpr = window.devicePixelRatio || 1;
+    canvas.style.width = cssW + 'px';
+    canvas.style.height = cssH + 'px';
+    canvas.width = Math.round(cssW*dpr);
+    canvas.height = Math.round(cssH*dpr);
+    ctx.setTransform(dpr*(cssW/1100),0,0,dpr*(cssH/440),0,0);
+  }
+  fit();
+  window.addEventListener('resize', fit);
+
+  let t = 0;
+  let frame = 0;
+  let running = true;
+  const W = 1100;
+
+  const state = {prod:0.78, pert:0.18, fert:0.40, risk:0.22};
+  const riskHist = [];
+  const particles = [];
+  const cows = Array.from({length:8},(_,i)=>({
+    id: 'C-' + (1024+i*37),
+    score: Math.random()*0.6+0.2,
+    reason: ''
+  }));
+
+  const REASONS = [
+    'rumination −18% vs 7-day mean',
+    'rear-quarter flow atypically low',
+    'two extra refusals',
+    'activity drop in past 36 h',
+    'milk conductivity ↑ left rear',
+    'inter-milking interval shortened',
+    'yield −12% vs lactation curve',
+    'oestrus signal, screen for AI'
+  ];
+
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function step(){
+    t += 1;
+    state.prod = clamp(0.78 + 0.06*Math.sin(t/4.1) + (Math.random()-0.5)*0.04, 0.55, 0.95);
+    state.pert = clamp(0.18 + 0.10*Math.sin(t/3.3+1.2) + (Math.random()-0.5)*0.05, 0.05, 0.55);
+    state.fert = clamp(0.40 + 0.18*Math.sin(t/5.7+2.4) + (Math.random()-0.5)*0.04, 0.05, 0.90);
+    state.risk = clamp(0.22 + 0.18*Math.sin(t/6.9) + 0.10*Math.sin(t/2.2+0.3) + (Math.random()-0.5)*0.05, 0.05, 0.90);
+    riskHist.push(state.risk);
+    if (riskHist.length>60) riskHist.shift();
+    cows.forEach((c,i)=>{
+      c.score = clamp(c.score + (Math.random()-0.5)*0.18, 0.05, 0.98);
+      if (i===0) c.score = clamp(0.7+state.risk*0.2,0.6,0.99);
+      c.reason = REASONS[(Math.floor(t/2)+i)%REASONS.length];
+    });
+    cows.sort((a,b)=>b.score-a.score);
+  }
+
+  function emitParticle(){
+    const lanes = [
+      {y: 130, color:'#1f3864'},
+      {y: 165, color:'#1f3864'},
+      {y: 200, color:'#d97706'},
+      {y: 235, color:'#0f8a4f'},
+      {y: 270, color:'#c0392b'},
+    ];
+    const lane = lanes[Math.floor(Math.random()*lanes.length)];
+    particles.push({x:240, y:lane.y, vx: 1.6+Math.random()*0.6, color:lane.color, life:0});
+  }
+
+  function drawCow(x,y){
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.fillStyle = '#fff';
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(0,0,55,32,0,0,Math.PI*2);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#222';
+    ctx.beginPath(); ctx.ellipse(-20,-6,10,6,0,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(15,8,12,7,0,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(28,-10,7,5,0,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.ellipse(-48,-6,16,13,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#f3c5b5';
+    ctx.beginPath(); ctx.ellipse(-52,-16,5,4,0,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#222';
+    ctx.beginPath(); ctx.arc(-54,-7,1.6,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#222'; ctx.lineWidth = 3; ctx.lineCap='round';
+    [-25,-8,12,28].forEach(lx=>{
+      ctx.beginPath(); ctx.moveTo(lx,28); ctx.lineTo(lx,52); ctx.stroke();
+    });
+    ctx.fillStyle = '#f8c2b8';
+    ctx.beginPath(); ctx.ellipse(5,28,11,7,0,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#d97706'; ctx.lineWidth = 2.4;
+    ctx.beginPath(); ctx.arc(-42,2,12,-0.7,0.9); ctx.stroke();
+    ctx.fillStyle = '#d97706';
+    ctx.beginPath(); ctx.arc(-30,8,2.6,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawDigitalCow(x,y){
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.strokeStyle = '#0b6cbd';
+    ctx.lineWidth = 1.2;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();
+    ctx.ellipse(0,0,55,32,0,0,Math.PI*2); ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(-48,-6,16,13,0,0,Math.PI*2); ctx.stroke();
+    for(let i=-50;i<=50;i+=12){
+      ctx.beginPath();
+      const h = Math.sqrt(Math.max(0,1-(i/55)**2))*32;
+      ctx.moveTo(i,-h); ctx.lineTo(i,h); ctx.stroke();
+    }
+    for(let j=-24;j<=24;j+=10){
+      ctx.beginPath();
+      const w = Math.sqrt(Math.max(0,1-(j/32)**2))*55;
+      ctx.moveTo(-w,j); ctx.lineTo(w,j); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#0b6cbd';
+    for(let k=0;k<6;k++){
+      const a = (frame/22 + k)*0.9;
+      const rx = 70+Math.cos(a)*6;
+      const ry = Math.sin(a)*22;
+      ctx.beginPath(); ctx.arc(rx,ry,1.6,0,Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawStateBars(x,y){
+    const bars = [
+      {label:'prod', val:state.prod, color:'#1f3864'},
+      {label:'pert', val:state.pert, color:'#d97706'},
+      {label:'fert', val:state.fert, color:'#0f8a4f'},
+      {label:'risk', val:state.risk, color:'#c0392b'},
+    ];
+    ctx.font = '600 11px Inter, sans-serif';
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillText('Cow state · sₜ', x, y-12);
+    bars.forEach((b,i)=>{
+      const by = y + i*26;
+      ctx.fillStyle = '#5a5a5a';
+      ctx.font = '11px Inter, sans-serif';
+      ctx.fillText(b.label, x, by+10);
+      ctx.fillStyle = '#eee';
+      ctx.fillRect(x+34, by, 110, 12);
+      ctx.fillStyle = b.color;
+      ctx.fillRect(x+34, by, 110*b.val, 12);
+      ctx.fillStyle = '#0a0a0a';
+      ctx.font = '600 11px Inter, sans-serif';
+      ctx.fillText(b.val.toFixed(2), x+150, by+10);
+    });
+  }
+
+  function drawRiskSparkline(x,y,w,h){
+    ctx.strokeStyle = '#d6d6d6';
+    ctx.strokeRect(x,y,w,h);
+    ctx.fillStyle = '#5a5a5a';
+    ctx.font = '10px Inter, sans-serif';
+    ctx.fillText('risk · 60-day trajectory', x, y-4);
+    if (riskHist.length<2) return;
+    ctx.strokeStyle = '#c0392b';
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    riskHist.forEach((v,i)=>{
+      const px = x + (i/(60-1))*w;
+      const py = y + h - v*h;
+      if (i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    });
+    ctx.stroke();
+    const lv = riskHist[riskHist.length-1];
+    const lpx = x + ((riskHist.length-1)/(60-1))*w;
+    const lpy = y + h - lv*h;
+    ctx.fillStyle = '#c0392b';
+    ctx.beginPath(); ctx.arc(lpx,lpy,2.5,0,Math.PI*2); ctx.fill();
+  }
+
+  function drawWorklist(x,y){
+    ctx.fillStyle = '#0a0a0a';
+    ctx.font = '600 12px Inter, sans-serif';
+    ctx.fillText('Today’s top-5 worklist', x, y-8);
+    ctx.font = '11px Inter, sans-serif';
+    const top = cows.slice(0,5);
+    top.forEach((c,i)=>{
+      const by = y + i*30;
+      ctx.fillStyle = i===0 ? '#c0392b' : '#0a0a0a';
+      ctx.font = '700 12px Inter, sans-serif';
+      ctx.fillText('#'+(i+1), x, by+12);
+      ctx.fillStyle = '#0a0a0a';
+      ctx.font = '600 12px Inter, sans-serif';
+      ctx.fillText(c.id, x+28, by+12);
+      const band = c.score>0.75 ? {t:'screen now', c:'#c0392b'} :
+                   c.score>0.5  ? {t:'watch',      c:'#d97706'} :
+                                  {t:'no action',  c:'#0f8a4f'};
+      ctx.fillStyle = band.c;
+      ctx.fillRect(x+82, by+2, 70, 14);
+      ctx.fillStyle = '#fff';
+      ctx.font = '600 10px Inter, sans-serif';
+      ctx.fillText(band.t, x+88, by+13);
+      ctx.fillStyle = '#333';
+      ctx.font = '11px Inter, sans-serif';
+      ctx.fillText('"'+c.reason+'"', x+160, by+12);
+      ctx.fillStyle = '#eee';
+      ctx.fillRect(x, by+18, 320, 4);
+      ctx.fillStyle = band.c;
+      ctx.fillRect(x, by+18, 320*c.score, 4);
+    });
+  }
+
+  function drawArrow(x1,y1,x2,y2,label){
+    ctx.strokeStyle = '#0a0a0a';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    const a = Math.atan2(y2-y1,x2-x1);
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2-8*Math.cos(a-0.4), y2-8*Math.sin(a-0.4));
+    ctx.lineTo(x2-8*Math.cos(a+0.4), y2-8*Math.sin(a+0.4));
+    ctx.closePath();
+    ctx.fillStyle='#0a0a0a'; ctx.fill();
+    if (label){
+      ctx.fillStyle='#5a5a5a';
+      ctx.font='10px Inter, sans-serif';
+      ctx.fillText(label, (x1+x2)/2-12, (y1+y2)/2-6);
+    }
+  }
+
+  function drawColumn(title, x, y){
+    ctx.fillStyle = '#E60019';
+    ctx.font = '700 11px Inter, sans-serif';
+    ctx.fillText(title.toUpperCase(), x, y);
+    ctx.strokeStyle = '#E60019';
+    ctx.beginPath(); ctx.moveTo(x, y+4); ctx.lineTo(x+170, y+4); ctx.stroke();
+  }
+
+  function frameStep(){
+    ctx.fillStyle = '#fbfbfa';
+    ctx.fillRect(0,0,W,440);
+
+    drawColumn('Real cow + daily signal', 30, 30);
+    drawColumn('Digital twin · cow state', 470, 30);
+    drawColumn('Constrained prioritiser · worklist', 760, 30);
+
+    drawCow(140, 180);
+    const lanes = [
+      {y:130, label:'milk',    color:'#1f3864'},
+      {y:165, label:'AMS',     color:'#1f3864'},
+      {y:200, label:'collar',  color:'#d97706'},
+      {y:235, label:'weather', color:'#0f8a4f'},
+      {y:270, label:'events',  color:'#c0392b'},
+    ];
+    ctx.font = '11px Inter, sans-serif';
+    lanes.forEach(l=>{
+      ctx.fillStyle = '#5a5a5a';
+      ctx.fillText(l.label, 215, l.y+4);
+      ctx.strokeStyle = '#e8e8e6';
+      ctx.beginPath(); ctx.moveTo(240, l.y); ctx.lineTo(450, l.y); ctx.stroke();
+    });
+
+    ctx.fillStyle = '#0a0a0a';
+    ctx.font = '600 11px Inter, sans-serif';
+    ctx.fillText('Day ' + (t+1), 30, 320);
+    ctx.font = '10px Inter, sans-serif';
+    ctx.fillStyle = '#5a5a5a';
+    ctx.fillText('simulated stream · 5 channels', 30, 336);
+
+    for (let i=particles.length-1;i>=0;i--){
+      const p = particles[i];
+      p.x += p.vx;
+      p.life++;
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x,p.y,2.4,0,Math.PI*2); ctx.fill();
+      if (p.x>460){
+        particles.splice(i,1);
+      }
+    }
+    if (frame%6===0) emitParticle();
+
+    drawDigitalCow(560, 130);
+    drawStateBars(490, 200);
+    drawRiskSparkline(490, 320, 200, 60);
+
+    drawArrow(456, 200, 488, 200, 'oₜ');
+    drawArrow(700, 220, 760, 220, 'rank');
+
+    drawWorklist(760, 70);
+
+    if (frame%28===0) step();
+    frame++;
+  }
+
+  function loop(){
+    if (running) frameStep();
+    requestAnimationFrame(loop);
+  }
+  for (let i=0;i<14;i++) step();
+  loop();
+
+  btnPlay.addEventListener('click', ()=>{
+    running = !running;
+    btnPlay.textContent = running ? 'Pause' : 'Play';
+    btnPlay.setAttribute('aria-pressed', running ? 'true':'false');
+  });
+  btnReset.addEventListener('click', ()=>{
+    t=0; frame=0; riskHist.length=0; particles.length=0;
+    for (let i=0;i<14;i++) step();
+  });
+})();
+</script>
+</body>
+</html>
