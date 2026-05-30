@@ -155,6 +155,83 @@
     .metric:last-child{border-bottom:0}
     .metric b{font-family:'Merriweather',serif;color:var(--nature-red)}
 
+    /* === motivational counter strip === */
+    .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+      margin:24px 0 8px;border:1px solid var(--nature-rule);border-radius:2px;
+      background:linear-gradient(180deg,#fff 0%,#fafaf8 100%);overflow:hidden;
+      font-family:'Inter',sans-serif}
+    @media (max-width:680px){.stats-strip{grid-template-columns:repeat(2,1fr)}}
+    .stat{padding:18px 14px;text-align:center;border-right:1px solid var(--nature-rule);
+      position:relative}
+    .stat:last-child{border-right:0}
+    @media (max-width:680px){
+      .stat:nth-child(2){border-right:0}
+      .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--nature-rule)}
+    }
+    .stat-num{font-family:'Merriweather',serif;font-weight:900;font-size:34px;
+      color:var(--nature-red);line-height:1.05;letter-spacing:-.5px;
+      font-variant-numeric:tabular-nums;display:inline-block}
+    .stat-suffix{font-family:'Merriweather',serif;font-weight:900;font-size:22px;
+      color:var(--nature-red);margin-left:2px}
+    .stat-label{font-size:11.5px;color:var(--nature-grey);text-transform:uppercase;
+      letter-spacing:1.1px;margin-top:6px;line-height:1.3}
+    .stat-sub{font-size:11px;color:#222;margin-top:2px;font-style:italic}
+    .stat .bar{position:absolute;bottom:0;left:0;height:2px;background:var(--nature-red);
+      width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+    .stat.is-on .bar{width:100%}
+
+    /* === Figure 2 — digital-twin triple SVG === */
+    .fig-stage-svg{padding:18px 12px 6px;background:
+      radial-gradient(900px 280px at 50% 50%,#f6f8fb 0%,#fbfbfa 60%,#fbfbfa 100%)}
+    .fig-stage-svg svg{display:block;width:100%;height:auto;max-height:380px}
+    .pulse-halo{transform-origin:center;transform-box:fill-box;
+      animation:haloPulse 2.4s ease-in-out infinite}
+    .pulse-halo.d2{animation-delay:.6s}
+    .pulse-halo.d3{animation-delay:1.2s}
+    .pulse-halo.d4{animation-delay:1.8s}
+    @keyframes haloPulse{
+      0%{opacity:.55;transform:scale(.6)}
+      70%{opacity:0;transform:scale(1.7)}
+      100%{opacity:0;transform:scale(1.7)}
+    }
+    .flow-dot{animation:flowR 3.4s linear infinite}
+    .flow-dot.back{animation:flowL 3.4s linear infinite}
+    @keyframes flowR{
+      0%{transform:translateX(0);opacity:0}
+      10%{opacity:1}
+      90%{opacity:1}
+      100%{transform:translateX(360px);opacity:0}
+    }
+    @keyframes flowL{
+      0%{transform:translateX(0);opacity:0}
+      10%{opacity:1}
+      90%{opacity:1}
+      100%{transform:translateX(-360px);opacity:0}
+    }
+    .twin-glow{transform-origin:center;transform-box:fill-box;
+      animation:twinGlow 3s ease-in-out infinite}
+    @keyframes twinGlow{
+      0%,100%{opacity:.35}
+      50%{opacity:.7}
+    }
+    .badge-float{animation:badgeFloat 4s ease-in-out infinite}
+    .badge-float.d2{animation-delay:.7s}
+    .badge-float.d3{animation-delay:1.4s}
+    .badge-float.d4{animation-delay:2.1s}
+    @keyframes badgeFloat{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-4px)}
+    }
+    .grid-rotate{transform-origin:center;transform-box:fill-box;
+      animation:gridRot 18s linear infinite}
+    @keyframes gridRot{
+      from{transform:rotate(0)}
+      to{transform:rotate(360deg)}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .pulse-halo,.flow-dot,.twin-glow,.badge-float,.grid-rotate{animation:none !important}
+    }
+
     /* references */
     .refs{font-family:'Inter',sans-serif;font-size:13.5px;color:#333;line-height:1.55;
       counter-reset:ref;padding-left:0;list-style:none;margin-top:8px}
@@ -187,6 +264,7 @@
     <div>
       <a href="#methods">Methods</a> &nbsp;·&nbsp;
       <a href="#fig1">Figure 1</a> &nbsp;·&nbsp;
+      <a href="#fig2">Figure 2</a> &nbsp;·&nbsp;
       <a href="#wp">Work plan</a> &nbsp;·&nbsp;
       <a href="#pubs">Publications</a> &nbsp;·&nbsp;
       <a href="#refs">References</a>
@@ -260,6 +338,35 @@
         </p>
       </section>
 
+      <section id="impact-strip" aria-label="EU dairy at a glance">
+        <div class="stats-strip" id="statsStrip">
+          <div class="stat">
+            <div><span class="stat-num" data-target="155" data-decimals="0">0</span><span class="stat-suffix">&nbsp;Mt</span></div>
+            <div class="stat-label">EU cow milk · per year</div>
+            <div class="stat-sub">Eurostat 2023</div>
+            <div class="bar"></div>
+          </div>
+          <div class="stat">
+            <div><span class="stat-num" data-target="20" data-decimals="0">0</span><span class="stat-suffix">&nbsp;M</span></div>
+            <div class="stat-label">EU dairy cows</div>
+            <div class="stat-sub">across 1.4 M farms</div>
+            <div class="bar"></div>
+          </div>
+          <div class="stat">
+            <div><span class="stat-suffix">€&nbsp;</span><span class="stat-num" data-target="1.5" data-decimals="1">0</span><span class="stat-suffix">&nbsp;B</span></div>
+            <div class="stat-label">Subclinical mastitis · per year</div>
+            <div class="stat-sub">literature estimate</div>
+            <div class="bar"></div>
+          </div>
+          <div class="stat">
+            <div><span class="stat-suffix">−</span><span class="stat-num" data-target="27" data-decimals="0">0</span><span class="stat-suffix">&nbsp;%</span></div>
+            <div class="stat-label">Alert burden with DairyTwin</div>
+            <div class="stat-sub">at fixed recall</div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </section>
+
       <section id="fig1">
         <figure class="fig">
           <div class="fig-head">Figure 1 · Live DairyTwin schematic — real cow → digital twin → ranked worklist</div>
@@ -279,6 +386,251 @@
             <span style="color:var(--twin-red)">risk</span>). The state feeds a constrained
             herd prioritiser that emits a ranked, explainable daily worklist (right). The
             animation reflects 30 simulated days of operation.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="fig2">
+        <figure class="fig">
+          <div class="fig-head">Figure 2 · The digital-twin triple — physical entity, virtual entity, bidirectional data link</div>
+          <div class="fig-stage fig-stage-svg">
+            <svg viewBox="0 0 1100 360" preserveAspectRatio="xMidYMid meet" role="img"
+                 aria-label="Diagram of the digital-twin triple: a real Holstein cow on the left, a bidirectional data link in the middle, and a holographic digital twin on the right.">
+              <defs>
+                <radialGradient id="cowSpot" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#1a1a1a" stop-opacity="1"/>
+                  <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.85"/>
+                </radialGradient>
+                <radialGradient id="twinGlow" cx="50%" cy="50%" r="55%">
+                  <stop offset="0%" stop-color="#0b6cbd" stop-opacity="0.32"/>
+                  <stop offset="60%" stop-color="#0b6cbd" stop-opacity="0.10"/>
+                  <stop offset="100%" stop-color="#0b6cbd" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#e7ecdb"/>
+                  <stop offset="100%" stop-color="#cad8ad"/>
+                </linearGradient>
+                <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#eef3fa"/>
+                  <stop offset="100%" stop-color="#d6e2f1"/>
+                </linearGradient>
+                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2.4"/>
+                  <feOffset dx="0" dy="2"/>
+                  <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+                  <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+
+              <!-- ===== LEFT panel · physical cow ===== -->
+              <g aria-label="Physical entity">
+                <rect x="40" y="40" width="380" height="280" rx="6" fill="url(#grass)" stroke="#cdd6b3"/>
+                <text x="60" y="68" font-family="Inter, sans-serif" font-size="12"
+                      font-weight="700" letter-spacing="1.4" fill="#0f5f1a">PHYSICAL ENTITY · COW</text>
+                <text x="60" y="84" font-family="Inter, sans-serif" font-size="11" fill="#3a5a2b">
+                  Individual dairy cow in the herd
+                </text>
+
+                <!-- ground line -->
+                <line x1="60" y1="270" x2="400" y2="270" stroke="#a8b88a" stroke-width="1.5" stroke-dasharray="2,3"/>
+
+                <!-- cow body group -->
+                <g transform="translate(220,210)" filter="url(#softShadow)">
+                  <!-- legs -->
+                  <line x1="-40" y1="35" x2="-40" y2="65" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="-15" y1="38" x2="-15" y2="65" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="20"  y1="38" x2="20"  y2="65" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="45"  y1="35" x2="45"  y2="65" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+                  <!-- udder -->
+                  <ellipse cx="10" cy="42" rx="14" ry="9" fill="#f5b8ad"/>
+                  <line x1="6" y1="50" x2="6" y2="56" stroke="#d99a8e" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="14" y1="50" x2="14" y2="56" stroke="#d99a8e" stroke-width="2" stroke-linecap="round"/>
+                  <!-- tail -->
+                  <path d="M70 0 Q92 8 88 36" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <!-- body -->
+                  <ellipse cx="0" cy="0" rx="72" ry="40" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"/>
+                  <!-- spots -->
+                  <path d="M-30 -12 Q-18 -22 -2 -18 Q-6 -2 -22 0 Q-36 0 -30 -12 Z" fill="url(#cowSpot)"/>
+                  <path d="M18 12 Q40 4 50 18 Q42 28 24 26 Q14 22 18 12 Z" fill="url(#cowSpot)"/>
+                  <path d="M44 -18 Q56 -22 58 -10 Q52 -2 42 -8 Z" fill="url(#cowSpot)"/>
+                  <!-- head -->
+                  <ellipse cx="-78" cy="-12" rx="22" ry="18" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"/>
+                  <!-- ear -->
+                  <ellipse cx="-86" cy="-28" rx="7" ry="5" fill="#f3c5b5" stroke="#a87a6a" stroke-width="1" transform="rotate(-25 -86 -28)"/>
+                  <!-- horn -->
+                  <path d="M-70 -28 Q-66 -36 -60 -34" stroke="#caa57a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                  <!-- eye -->
+                  <circle cx="-86" cy="-14" r="2" fill="#1a1a1a"/>
+                  <!-- muzzle -->
+                  <ellipse cx="-96" cy="-6" rx="6" ry="5" fill="#f8d6cc"/>
+                  <circle cx="-98" cy="-7" r="0.9" fill="#1a1a1a"/>
+                  <circle cx="-94" cy="-7" r="0.9" fill="#1a1a1a"/>
+                  <!-- collar with sensor -->
+                  <path d="M-65 5 Q-70 14 -62 22" stroke="#d97706" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <rect x="-58" y="12" width="10" height="7" rx="1.5" fill="#d97706"/>
+                  <circle cx="-53" cy="15.5" r="1.2" fill="#fff"/>
+                </g>
+
+                <!-- sensor halos around the cow -->
+                <!-- collar halo -->
+                <g transform="translate(165,225)">
+                  <circle r="6" fill="#d97706" opacity="0.18" class="pulse-halo"/>
+                  <circle r="3" fill="#d97706"/>
+                </g>
+                <!-- ear tag / activity halo -->
+                <g transform="translate(132,177)">
+                  <circle r="6" fill="#0b6cbd" opacity="0.20" class="pulse-halo d2"/>
+                  <circle r="3" fill="#0b6cbd"/>
+                </g>
+                <!-- AMS at the udder -->
+                <g transform="translate(228,250)">
+                  <circle r="6" fill="#0f8a4f" opacity="0.20" class="pulse-halo d3"/>
+                  <circle r="3" fill="#0f8a4f"/>
+                </g>
+                <!-- weather above -->
+                <g transform="translate(330,110)">
+                  <circle r="6" fill="#c0392b" opacity="0.18" class="pulse-halo d4"/>
+                  <circle r="3" fill="#c0392b"/>
+                  <text x="14" y="4" font-family="Inter, sans-serif" font-size="10" fill="#5a5a5a">weather</text>
+                </g>
+
+                <!-- legend dots -->
+                <g font-family="Inter, sans-serif" font-size="10" fill="#3a4a2b">
+                  <circle cx="62" cy="296" r="3" fill="#d97706"/><text x="70" y="299">collar</text>
+                  <circle cx="120" cy="296" r="3" fill="#0b6cbd"/><text x="128" y="299">activity</text>
+                  <circle cx="192" cy="296" r="3" fill="#0f8a4f"/><text x="200" y="299">AMS / milk</text>
+                  <circle cx="290" cy="296" r="3" fill="#c0392b"/><text x="298" y="299">events / wx</text>
+                </g>
+              </g>
+
+              <!-- ===== MIDDLE panel · bidirectional data link ===== -->
+              <g aria-label="Bidirectional data link" transform="translate(0,0)">
+                <text x="555" y="68" font-family="Inter, sans-serif" font-size="12"
+                      font-weight="700" letter-spacing="1.4" fill="#E60019"
+                      text-anchor="middle">BIDIRECTIONAL DATA LINK</text>
+                <text x="555" y="84" font-family="Inter, sans-serif" font-size="11"
+                      fill="#5a5a5a" text-anchor="middle">
+                  daily nightly bundle &nbsp;·&nbsp; stays in step over the cow's lifecycle
+                </text>
+
+                <!-- top rail: physical → virtual (observations) -->
+                <g>
+                  <line x1="430" y1="140" x2="790" y2="140" stroke="#0b6cbd" stroke-width="1.6"/>
+                  <polygon points="790,140 782,135 782,145" fill="#0b6cbd"/>
+                  <text x="610" y="130" font-family="Inter, sans-serif" font-size="11"
+                        fill="#0b6cbd" text-anchor="middle">observations  oₜ  →</text>
+                  <!-- moving dots -->
+                  <g>
+                    <circle cx="430" cy="140" r="3" fill="#1f3864" class="flow-dot"/>
+                    <circle cx="430" cy="140" r="3" fill="#d97706" class="flow-dot" style="animation-delay:.6s"/>
+                    <circle cx="430" cy="140" r="3" fill="#0f8a4f" class="flow-dot" style="animation-delay:1.2s"/>
+                    <circle cx="430" cy="140" r="3" fill="#c0392b" class="flow-dot" style="animation-delay:1.8s"/>
+                    <circle cx="430" cy="140" r="3" fill="#1f3864" class="flow-dot" style="animation-delay:2.4s"/>
+                  </g>
+                </g>
+
+                <!-- bottom rail: virtual → physical (actions / worklist) -->
+                <g>
+                  <line x1="430" y1="230" x2="790" y2="230" stroke="#c0392b" stroke-width="1.6"/>
+                  <polygon points="430,230 438,225 438,235" fill="#c0392b"/>
+                  <text x="610" y="250" font-family="Inter, sans-serif" font-size="11"
+                        fill="#c0392b" text-anchor="middle">←  ranked, explainable worklist</text>
+                  <!-- moving dots (reverse) -->
+                  <g>
+                    <circle cx="790" cy="230" r="3" fill="#c0392b" class="flow-dot back"/>
+                    <circle cx="790" cy="230" r="3" fill="#c0392b" class="flow-dot back" style="animation-delay:.8s"/>
+                    <circle cx="790" cy="230" r="3" fill="#c0392b" class="flow-dot back" style="animation-delay:1.6s"/>
+                    <circle cx="790" cy="230" r="3" fill="#c0392b" class="flow-dot back" style="animation-delay:2.4s"/>
+                  </g>
+                </g>
+
+                <!-- daily clock badge -->
+                <g transform="translate(610,185)">
+                  <rect x="-55" y="-14" width="110" height="28" rx="14" fill="#fff" stroke="#d6d6d6"/>
+                  <circle cx="-38" cy="0" r="6" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+                  <line x1="-38" y1="0" x2="-38" y2="-4" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="-38" y1="0" x2="-35" y2="0" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round"/>
+                  <text x="-25" y="4" font-family="Inter, sans-serif" font-size="11" fill="#0a0a0a" font-weight="600">daily sync · 1×/24h</text>
+                </g>
+              </g>
+
+              <!-- ===== RIGHT panel · digital twin ===== -->
+              <g aria-label="Virtual entity">
+                <rect x="800" y="40" width="260" height="280" rx="6" fill="url(#floor)" stroke="#bcd0e8"/>
+                <text x="820" y="68" font-family="Inter, sans-serif" font-size="12"
+                      font-weight="700" letter-spacing="1.4" fill="#0b3a73">VIRTUAL ENTITY · TWIN</text>
+                <text x="820" y="84" font-family="Inter, sans-serif" font-size="11" fill="#33547a">
+                  Latent state vector sₜ, updated daily
+                </text>
+
+                <!-- holographic glow -->
+                <ellipse cx="930" cy="200" rx="100" ry="80" fill="url(#twinGlow)" class="twin-glow"/>
+
+                <!-- wireframe cow silhouette -->
+                <g transform="translate(930,210)" stroke="#0b6cbd" fill="none" stroke-width="1.2">
+                  <ellipse cx="0" cy="0" rx="60" ry="32" stroke-dasharray="3,3"/>
+                  <ellipse cx="-66" cy="-10" rx="18" ry="14" stroke-dasharray="3,3"/>
+                  <!-- longitudinal grid -->
+                  <line x1="-45" y1="-23" x2="-45" y2="23"/>
+                  <line x1="-25" y1="-30" x2="-25" y2="30"/>
+                  <line x1="0"   y1="-32" x2="0"   y2="32"/>
+                  <line x1="25"  y1="-30" x2="25"  y2="30"/>
+                  <line x1="45"  y1="-23" x2="45"  y2="23"/>
+                  <!-- latitudinal -->
+                  <line x1="-58" y1="-12" x2="58" y2="-12"/>
+                  <line x1="-60" y1="0"   x2="60" y2="0"/>
+                  <line x1="-58" y1="12"  x2="58" y2="12"/>
+                  <!-- legs as wireframe lines -->
+                  <line x1="-40" y1="32" x2="-40" y2="56" stroke-dasharray="2,3"/>
+                  <line x1="-15" y1="32" x2="-15" y2="56" stroke-dasharray="2,3"/>
+                  <line x1="20"  y1="32" x2="20"  y2="56" stroke-dasharray="2,3"/>
+                  <line x1="45"  y1="32" x2="45"  y2="56" stroke-dasharray="2,3"/>
+                </g>
+
+                <!-- orbital data ring -->
+                <g transform="translate(930,205)" class="grid-rotate">
+                  <circle r="78" fill="none" stroke="#0b6cbd" stroke-width="0.8" stroke-dasharray="4,4" opacity="0.55"/>
+                  <circle cx="78" cy="0" r="2.2" fill="#1f3864"/>
+                  <circle cx="-78" cy="0" r="2.2" fill="#d97706"/>
+                  <circle cx="0" cy="78" r="2.2" fill="#0f8a4f"/>
+                  <circle cx="0" cy="-78" r="2.2" fill="#c0392b"/>
+                </g>
+
+                <!-- floating state badges -->
+                <g font-family="Inter, sans-serif" font-size="10" font-weight="700">
+                  <g class="badge-float" transform="translate(815,110)">
+                    <rect x="0" y="0" width="58" height="20" rx="10" fill="#fff" stroke="#1f3864" stroke-width="1.2"/>
+                    <text x="29" y="14" text-anchor="middle" fill="#1f3864">prod 0.82</text>
+                  </g>
+                  <g class="badge-float d2" transform="translate(990,110)">
+                    <rect x="0" y="0" width="58" height="20" rx="10" fill="#fff" stroke="#d97706" stroke-width="1.2"/>
+                    <text x="29" y="14" text-anchor="middle" fill="#d97706">pert 0.18</text>
+                  </g>
+                  <g class="badge-float d3" transform="translate(815,288)">
+                    <rect x="0" y="0" width="58" height="20" rx="10" fill="#fff" stroke="#0f8a4f" stroke-width="1.2"/>
+                    <text x="29" y="14" text-anchor="middle" fill="#0f8a4f">fert 0.40</text>
+                  </g>
+                  <g class="badge-float d4" transform="translate(990,288)">
+                    <rect x="0" y="0" width="58" height="20" rx="10" fill="#fff" stroke="#c0392b" stroke-width="1.2"/>
+                    <text x="29" y="14" text-anchor="middle" fill="#c0392b">risk 0.24</text>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Bottom credit line -->
+              <text x="550" y="345" font-family="Inter, sans-serif" font-size="10"
+                    fill="#5a5a5a" text-anchor="middle" font-style="italic">
+                After Grieves (2014) and Grieves &amp; Vickers (2017), translated to a dairy cow on commercially available farm data.
+              </text>
+            </svg>
+          </div>
+          <figcaption>
+            <b>Figure 2.</b> The digital-twin <i>triple</i> after Grieves (2014): a
+            <b>physical entity</b> (the cow), a <b>virtual entity</b> (the cow's latent
+            state vector sₜ), and a <b>bidirectional data link</b> that keeps the two in
+            step over the cow's lifecycle. In DairyTwin, the link is the daily nightly
+            bundle the farm already exports — milk, AMS, collar, weather, events. The
+            twin returns an action: a ranked, explainable daily worklist.
           </figcaption>
         </figure>
       </section>
@@ -562,6 +914,46 @@
   </main>
 
 <script>
+// ===== motivational counters · animate on scroll-in =====
+(function(){
+  const strip = document.getElementById('statsStrip');
+  if (!strip) return;
+  const nums = strip.querySelectorAll('.stat-num');
+  const cells = strip.querySelectorAll('.stat');
+  const easeOutCubic = t => 1 - Math.pow(1-t, 3);
+  function animateNum(el){
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const duration = 1400;
+    const t0 = performance.now();
+    function tick(now){
+      const t = Math.min(1, (now - t0) / duration);
+      const v = target * easeOutCubic(t);
+      el.textContent = v.toFixed(decimals);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(decimals);
+    }
+    requestAnimationFrame(tick);
+  }
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          cells.forEach(c => c.classList.add('is-on'));
+          nums.forEach(animateNum);
+          io.disconnect();
+        }
+      });
+    }, {threshold: 0.35});
+    io.observe(strip);
+  } else {
+    cells.forEach(c => c.classList.add('is-on'));
+    nums.forEach(animateNum);
+  }
+})();
+
 (function(){
   const canvas = document.getElementById('twinCanvas');
   const ctx = canvas.getContext('2d');
