@@ -120,6 +120,24 @@
       filter:grayscale(.05) contrast(1.02)}
     .portrait h3{font-family:'Inter',sans-serif;font-size:15px;margin:0 0 4px;color:var(--nature-ink);font-weight:700}
     .portrait p{font-family:'Inter',sans-serif;font-size:13.5px;color:#333;margin:0 0 8px;line-height:1.55}
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-family:'Inter',sans-serif;font-size:12px}
+    .badge-row a{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;
+      border:1px solid var(--nature-rule);border-radius:14px;background:#fff;color:#222;
+      text-decoration:none;line-height:1.3}
+    .badge-row a:hover{border-color:var(--nature-ink);background:#fafaf8}
+    .badge-row a .k{font-weight:700;color:var(--nature-red);letter-spacing:.3px}
+    .badge-row a .arr{color:#888}
+
+    /* endorsement card */
+    .endorse{margin:24px 0;border:1px solid var(--nature-rule);border-left:3px solid var(--eu-blue);
+      padding:18px 20px;background:#fff;border-radius:2px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.55}
+    .endorse h3{font-size:15px;margin:0 0 6px;color:var(--eu-blue);font-weight:700;font-family:'Inter',sans-serif}
+    .endorse blockquote{margin:10px 0;padding:8px 14px;border-left:2px solid var(--nature-rule);
+      color:#333;font-style:italic;font-family:'Merriweather',Georgia,serif;font-size:14px;line-height:1.6}
+    .endorse .sig{color:var(--nature-grey);font-size:12.5px;margin-top:8px}
+    .endorse .dl{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;
+      background:var(--nature-ink);color:#fff;border-radius:2px;text-decoration:none;font-weight:600;font-size:12.5px;border:0}
+    .endorse .dl:hover{background:var(--eu-blue)}
 
     /* table */
     table.data{width:100%;border-collapse:collapse;margin:14px 0 22px;
@@ -757,10 +775,44 @@
             </p>
             <p style="color:var(--nature-grey)">
               Dean's First Prize for the best Ph.D. publication at FEM CULS (2024) ·
-              Falling Walls Lab Czech Republic finalist (2024) ·
-              ORCID <a href="https://orcid.org/0009-0001-4355-5271">0009-0001-4355-5271</a>
+              Wageningen Summer School on Intelligent Agriculture — winning team (2025).
             </p>
+            <div class="badge-row">
+              <a href="https://www.falling-walls.cz/speakers/speakers-2024/" rel="noopener">
+                <span class="k">Falling Walls Lab CZ 2024</span><span>finalist</span><span class="arr">↗</span>
+              </a>
+              <a href="https://www.researchgate.net/profile/Jan-Saro/research" rel="noopener">
+                <span class="k">ResearchGate</span><span>profile &amp; outputs</span><span class="arr">↗</span>
+              </a>
+              <a href="https://orcid.org/0009-0001-4355-5271" rel="noopener">
+                <span class="k">ORCID</span><span>0009-0001-4355-5271</span><span class="arr">↗</span>
+              </a>
+              <a href="assets/Wageningen_Academy_recommendation_letter.pdf">
+                <span class="k">PDF</span><span>Wageningen Academy recommendation letter</span><span class="arr">↓</span>
+              </a>
+            </div>
           </div>
+        </div>
+
+        <div class="endorse">
+          <h3>External endorsement · Wageningen Academy (WUR)</h3>
+          <p style="margin:0 0 4px">
+            Wageningen University &amp; Research · Summer School on
+            <i>Intelligent Agriculture</i>, 14–24 July 2025 · winning team.
+          </p>
+          <blockquote>
+            "As a contributing member of the team, Jan Saro demonstrated excellent
+            teamwork, determination and commitment to the tasks assigned throughout
+            the summer school."
+          </blockquote>
+          <div class="sig">
+            — Dr. Zhen Liu, Program Manager &amp; Mr. Geurt Heimensen, Manager,
+            Wageningen Academy, Wageningen University &amp; Research
+            (recommendation letter, 1 September 2025).
+          </div>
+          <a class="dl" href="assets/Wageningen_Academy_recommendation_letter.pdf">
+            ⬇ Download recommendation letter (PDF)
+          </a>
         </div>
       </section>
 
@@ -904,10 +956,20 @@
         </ul>
       </div>
       <div class="card">
-        <h4>Contact</h4>
+        <h4>Recognitions</h4>
+        <ul>
+          <li>🏆 Dean's First Prize · best Ph.D. publication FEM CULS (2024)</li>
+          <li>🥇 Wageningen Summer School · Intelligent Agriculture · winning team (2025)</li>
+          <li>🎤 <a href="https://www.falling-walls.cz/speakers/speakers-2024/">Falling Walls Lab CZ 2024 finalist</a></li>
+          <li>📄 <a href="assets/Wageningen_Academy_recommendation_letter.pdf">Wageningen recommendation letter (PDF)</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Profiles &amp; contact</h4>
         <ul>
           <li><a href="mailto:sarojanek@gmail.com">sarojanek@gmail.com</a></li>
           <li><a href="https://orcid.org/0009-0001-4355-5271">ORCID 0009-0001-4355-5271</a></li>
+          <li><a href="https://www.researchgate.net/profile/Jan-Saro/research">ResearchGate · Jan Saro</a></li>
         </ul>
       </div>
     </aside>
